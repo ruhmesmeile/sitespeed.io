@@ -14,10 +14,15 @@ html(lang='en')
         link(rel='apple-touch-icon-precomposed', href=rootPath + '/img/ico/sitespeed.io-57.png')
         link(rel='shortcut icon', href=rootPath + '/img/ico/sitespeed.io.ico')
     body
-      include ./header.pug
-      .container
+      input.nav-trigger#nav-trigger(type="checkbox")
+      label(for="nav-trigger")
+      block menu
 
-        block content
+      .site-wrap
+        include ./header.pug
+        .container
 
-        include ./footer.pug
-      script(src= rootPath + '/js/sortable.min.js')
+          block content
+
+          include ./footer.pug
+        script(src= rootPath + '/js/sortable.min.js')

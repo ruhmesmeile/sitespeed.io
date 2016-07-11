@@ -1,4 +1,17 @@
 extends ./layout.pug
+block menu
+  - var d = pageInfo.data
+  ul.menu.navigation
+    if d.coach && d.coach.pageSummary
+      li.nav-item: a(href='#coach') Coach
+    if d.browsertime && d.browsertime.pageSummary
+      li.nav-item: a(href='#timings') Timings
+    if d.browsertime && d.browsertime.har && options.html && options.html.showWaterfallSummary
+      li.nav-item: a(href='#waterfall') Waterfall
+    if d.pagexray && d.pagexray.pageSummary
+      li.nav-item: a(href='#pagexray') Page summary
+    if d.webpagetest
+      li.nav-item: a(href='#webpagetest') WebPageTest
 
 block content
   - var d = pageInfo.data
@@ -60,18 +73,6 @@ block content
   if pageInfo.errors
     h4 Errors
     .errors= JSON.stringify(pageInfo.errors, null, 2)
-  else
-    ul.menu
-      if d.coach && d.coach.pageSummary
-        li: a(href='#coach') Coach
-      if d.browsertime && d.browsertime.pageSummary
-        li: a(href='#timings') Timings
-      if d.browsertime && d.browsertime.har && options.html && options.html.showWaterfallSummary
-        li: a(href='#waterfall') Waterfall
-      if d.pagexray && d.pagexray.pageSummary
-        li: a(href='#pagexray') Page summary
-      if d.webpagetest
-        li: a(href='#webpagetest') WebPageTest
 
   if d.coach && d.coach.pageSummary
     include ./coach/index.pug

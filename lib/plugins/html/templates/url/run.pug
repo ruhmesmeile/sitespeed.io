@@ -1,4 +1,18 @@
 extends ./layout.pug
+block menu
+  - var d = pageInfo.data
+  - runNumber = Number(runIndex)+1
+  ul.menu.navigation
+    if d.pagexray && d.pagexray.run
+      li.nav-item: a(href='#pagexray') Page summary
+    if d.coach && d.coach.run
+      li.nav-item: a(href='#coach') Coach
+    if d.browsertime && d.browsertime.run
+      li.nav-item: a(href='#timings') Timing
+      if d.browsertime.run.har
+        li.nav-item: a(href='#waterfall') Waterfall
+    if d.webpagetest && d.webpagetest.run
+      li.nav-item: a(href='#webpagetest') WebPageTest
 
 block content
   - var d = pageInfo.data
@@ -50,18 +64,6 @@ block content
   if pageInfo.error
     .error= pageInfo.error
   else
-    ul.menu
-      if d.pagexray && d.pagexray.run
-        li: a(href='#pagexray') Page summary
-      if d.coach && d.coach.run
-        li: a(href='#coach') Coach
-      if d.browsertime && d.browsertime.run
-        li: a(href='#timings') Timing
-        if d.browsertime.run.har
-          li: a(href='#waterfall') Waterfall
-      if d.webpagetest && d.webpagetest.run
-        li: a(href='#webpagetest') WebPageTest
-
     if d.pagexray && d.pagexray.run
       include ./pagexray/index.pug
 
