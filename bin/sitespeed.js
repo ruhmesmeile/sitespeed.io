@@ -49,7 +49,7 @@ require('whereis')('java', function searched(err) {
 				});
 
 				if (isFailing) {
-					process.exit(1);
+					process.exit(0);
 				}
 			}
 		});
